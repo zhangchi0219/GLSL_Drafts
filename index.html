@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLSL Drafts</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <canvas id="glcanvas"></canvas>
+
+    <div class="shader-menu">
+        <div class="shader-menu-header">
+            <span id="active-shader-name">Loading...</span>
+            <span class="toggle-arrow">&#9662;</span>
+        </div>
+        <ul id="shader-list" class="shader-list"></ul>
+    </div>
+
+    <div id="param-panel" class="param-panel"></div>
+
+    <div id="error-overlay"></div>
+    <div id="no-webgl">WebGL2 is not supported in this browser.</div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

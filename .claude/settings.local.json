@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.shadertoy.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm start)",
+      "Bash(git add:*)"
+    ]
+  }
+}

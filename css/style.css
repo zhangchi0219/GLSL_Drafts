@@ -1,0 +1,293 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+#glcanvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Shader menu overlay */
+.shader-menu {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 100;
+    font-family: 'Courier New', monospace;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 8px 12px;
+    min-width: 240px;
+    user-select: none;
+}
+
+.shader-menu-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.shader-menu-header:hover {
+    opacity: 0.8;
+}
+
+.toggle-arrow {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+}
+
+.toggle-arrow.open {
+    transform: rotate(180deg);
+}
+
+.shader-list {
+    display: none;
+    list-style: none;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 8px;
+}
+
+.shader-list.open {
+    display: block;
+}
+
+.shader-list li {
+    padding: 6px 4px;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+    letter-spacing: 0.3px;
+}
+
+.shader-list li:hover {
+    opacity: 1;
+}
+
+.shader-list li.active {
+    opacity: 1;
+    border-left: 2px solid #fff;
+    padding-left: 8px;
+}
+
+/* Parameter panel */
+.param-panel {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 100;
+    font-family: 'Courier New', monospace;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 8px 12px;
+    min-width: 260px;
+    max-width: 300px;
+    user-select: none;
+}
+
+.param-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.param-header:hover {
+    opacity: 0.8;
+}
+
+.param-toggle {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+}
+
+.param-toggle.open {
+    transform: rotate(180deg);
+}
+
+.param-body {
+    display: none;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 8px;
+}
+
+.param-body.open {
+    display: block;
+}
+
+.param-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 42px;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.param-row-select {
+    grid-template-columns: 100px 1fr;
+}
+
+.param-label {
+    font-size: 11px;
+    opacity: 0.7;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.param-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.param-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.param-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+
+.param-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.param-select {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    padding: 4px 8px;
+    cursor: pointer;
+    outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='rgba(255,255,255,0.5)'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 22px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.param-select:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.param-select:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.param-select option {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+.param-value {
+    font-size: 11px;
+    text-align: right;
+    opacity: 0.6;
+    font-variant-numeric: tabular-nums;
+}
+
+.param-reset {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 5px 0;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.param-reset:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+/* Error overlay */
+#error-overlay {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 200;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #ff6b6b;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: 4px;
+    padding: 12px 16px;
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* WebGL not supported fallback */
+#no-webgl {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+}

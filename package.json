@@ -1,0 +1,8 @@
+{
+  "name": "glsl-drafts",
+  "version": "1.0.0",
+  "description": "GLSL shader canvas with selectable effects",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}
