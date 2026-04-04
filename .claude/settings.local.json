@@ -5,7 +5,9 @@
       "WebFetch(domain:www.shadertoy.com)",
       "WebFetch(domain:github.com)",
       "Bash(npm start)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd GLSL shader canvas with selectable effects\n\nIncludes WebGL renderer with five fragment shaders \\(plasma, voronoi,\nraymarch, mandelbulb, ikeda\\) and a shared vertex shader, plus UI for\nswitching between effects.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
     ]
   }
 }
